@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tattaguine_mobile/profile.dart';
+
+import 'liste-pharmacie.dart';
 
 void main()=>runApp(
   new MaterialApp(
@@ -17,37 +20,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: const <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.cyanAccent,
-              ),
-              child: Text(
-                'Drawer Header',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.message),
-              title: Text('Messages'),
-            ),
-            ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-            ),
-          ],
-        ),
-      ),
       appBar: AppBar(
         title: Text("CFP-Tattaguine",style: TextStyle(
         color: Colors.black, fontFamily: 'times New Roman',fontSize: 22,
@@ -57,6 +29,51 @@ class MyApp extends StatelessWidget {
         child: Text("Bienvenue chez Moussa",style: TextStyle(
             color: Colors.orange, fontFamily: 'times New Roman',fontSize: 22
         ),),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children:  <Widget>[
+            DrawerHeader(
+              child: Center(
+                child: CircleAvatar(
+                  backgroundImage: AssetImage("./images/profile.jpg"),
+                  radius: 50,
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.cyanAccent,
+              ),
+            ),
+            ListTile(
+              trailing: Icon(Icons.arrow_right),
+              leading: Icon(Icons.account_circle),
+              title: Text('Profile'),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=> ProfilePage()
+                ));
+              },
+            ),
+            ListTile(
+              trailing: Icon(Icons.arrow_right),
+              leading: Icon(Icons.dehaze),
+              title: Text('Liste des pharmacie'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => PharmaciePage()
+                ));
+              },
+            ),
+            ListTile(
+              trailing: Icon(Icons.arrow_right),
+              leading: Icon(Icons.school),
+              title: Text('Candidature'),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
